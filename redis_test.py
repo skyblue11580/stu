@@ -10,6 +10,9 @@ redis_cli.set('title', title)
 print(redis_cli.get('name'))
 print(redis_cli.get('title'))
 print((redis_cli.get('nt')).decode())
+# 获取redis 中的键
+result = redis_cli.keys()
+print(result)
 # from redis import *
 # if __name__ == "__main__":
 #     try:
@@ -21,5 +24,5 @@ print((redis_cli.get('nt')).decode())
 #         print(result)
 #     except Exception as e:
 #         print(e)
-
+redis_cli.setex(name='name1', time=60, value='name1')
 
