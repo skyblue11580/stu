@@ -4,5 +4,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
+    # 准备上下文
+    context = {'name': '《水浒传》'}
 
-    return HttpResponse('终于等到你!!!')
+    return render(request, 'index.html', context)
