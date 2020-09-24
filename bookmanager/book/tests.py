@@ -99,3 +99,34 @@ BookInfo.objects.aggregate(Avg('readcount'))
 from django.db.models import Sum
 # 阅读量的总和
 BookInfo.objects.aggregate(Sum('readcount'))
+
+# 级联查询
+# 一对多访问
+# id为1的图书中的所有人物
+book = BookInfo.objects.get(id=1)
+book.peopleinfo_set.all()
+# 查询书名为’天龙八部‘的所有人物
+person = PeopleInfo.objects.filter(book__name='天龙八部')
+person
+# 查询图书阅读量>30的所有人物
+person = PeopleInfo.objects.filter(book__readcount__gt=30)
+person
+
+# 多对一
+# 查询人物叫欧阳锋的图书信息
+person = PeopleInfo.objects.get(name='欧阳锋')
+person.book
+# 获取人物姓名为郭靖的图书信息
+gj = BookInfo.objects.filter(peopleinfo__name='郭靖')
+
+# 获取人物姓名为乔峰的图书的信息
+qf = BookInfo.objects.get(peopleinfo__name='乔峰')
+qf
+
+# 查询图书，要求图书人物为‘王语嫣'
+wyy = BookInfo.objects.get(peopleinfo__name='王语嫣')
+wyy
+
+
+
+
