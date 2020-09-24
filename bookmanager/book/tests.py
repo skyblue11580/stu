@@ -91,3 +91,11 @@ BookInfo.objects.filter(readcount__gt=20, id__lt=3)
 BookInfo.objects.filter(Q(readcount__gt=20) & Q(id__lt=3))
 # 阅读量>20 获取id<3的图书 | 表示或
 BookInfo.objects.filter(Q(readcount__gt=20) | Q(id__lt=3))
+
+# 聚合函数，和排序函数  使用aggregate()过滤器调用聚合函数
+from django.db.models import Avg
+# 阅读量的平均值
+BookInfo.objects.aggregate(Avg('readcount'))
+from django.db.models import Sum
+# 阅读量的总和
+BookInfo.objects.aggregate(Sum('readcount'))
